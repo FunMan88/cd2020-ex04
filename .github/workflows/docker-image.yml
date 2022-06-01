@@ -30,16 +30,12 @@ jobs:
         format: 'table'
         output: 'trivy-results.sarif'
 
-    - name: Upload Trivy scan results to GitHub Security tab
-      uses: github/codeql-action/upload-sarif@v1
-      with:
-        sarif_file: 'trivy-results.sarif'
-          
-    - name: Push latest 
-      run: docker push funman/demo:latest
-    - name: Docker tag    
-      run: docker tag funman/demo:latest funman/demo:${{env.GIT_SHA}}
-    - name: Push Git SHA    
-      run: docker push funman/demo:${{env.GIT_SHA}}
+    
+    - if: success()      
+      name: Push and create tag
+      run: |
+        docker push funman/demo:latest   
+        docker tag funman/demo:latest funman/demo:${{env.GIT_SHA}}
+        docker push funman/demo:${{env.GIT_SHA}}
    
       
