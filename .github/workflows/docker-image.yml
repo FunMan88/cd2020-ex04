@@ -25,7 +25,7 @@ jobs:
     - name: Push latest 
       run: docker push funman/demo:latest
     - name: Push Git SHA    
-      run: docker push funman/demo:$GIT_SHA
+      run: docker push funman/demo:${{env.GIT_SHA}}
     - name: Docker tag    
-      run: docker tag funman/demo:latest funman/demo:$GIT_SHA
+      run: docker tag funman/demo:latest funman/demo:${{env.GIT_SHA}}
       
