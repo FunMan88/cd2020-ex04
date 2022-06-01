@@ -29,6 +29,7 @@ jobs:
         image-ref: 'funman/demo:latest'
         format: 'table'
         output: 'trivy-results.sarif'
+        exit-code: '1'
 
     
     - if: success()      
